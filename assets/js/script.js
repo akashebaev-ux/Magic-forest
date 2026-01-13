@@ -15,6 +15,10 @@ const images_Jump = 11;
 const playerWidth = 300;
 const playerHeight = 300;
 
+//=== the main character's position  ===
+const Player_Start_X = 150;
+const GROUND_Y = 270;
+
 //=== Player Runs ===
 
 const playerRunImages = [];
@@ -47,6 +51,9 @@ playerRunImages[0].onload = () => {
 };
 
 //=== player state ===
+
+
+
 //=== background state ===
 
 //=== collision ===
