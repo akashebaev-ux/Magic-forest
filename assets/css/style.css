@@ -1,3 +1,31 @@
-body {
-    background: red;
+html, body {
+    height: 100%;
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+.background-image1 {
+    background-image: url('../images/HP_BG.png');
+    background-size: cover;
+    background-position: center;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    z-index: -1;
+}
+
+header {
+    background: rgba(255, 255, 255, 0.8);
+    padding: 10px 20px;
+    text-align: center;
+}
+
+main {
+    padding: 20px;
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
 }

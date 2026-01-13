@@ -3,15 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Magic Forest</title>
 
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
-    
+    <header>
+        <h1>The Magic Forest</h1>
+    </header>
 
-
-
+    <main>
+        <img class="background-image1" src="assets/images/HP_BG.png" alt="Magic Forest"> 
+        <section>
+            <button id="playButton">Play</button>
+        </section>
+    </main>
+<script>
+    document.getElementById("playButton").addEventListener("click", function() {
+        alert("Enjoy your adventure in the Magic Forest!");
+    });
+</script>
     <script src="assets/js/script.js"></script>
 </body>
 </html>
