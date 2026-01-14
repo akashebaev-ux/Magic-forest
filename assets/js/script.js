@@ -24,12 +24,18 @@ const staggerFrames = 14;
 const playerWidth = 300; // sprite size 
 const playerHeight = 300; // sprite size
 
+//=== BACKGROUND IMAGE ===
+const backgroundImage = new Image();
+backgroundImage.src = "assets/images/BG.png";
+
+let bgX = 0;
+const bgSpeed = 6;
 
 //=== STEP 3 PLAYER POSITION AND PHYSICS ===
 
 //=== the main character's position  === 
 const Player_Start_X = 150; // fixed horizontal position (player stays)
-const FLOOR_OFFSET = 150;
+const FLOOR_OFFSET = 180;
 let GROUND_Y = canvas.height - playerHeight - FLOOR_OFFSET; // floor position
 const GRAVITY = 1; // pulls player down every frame
 const JUMP_FORCE = 20; // how strong jump is 
@@ -74,6 +80,18 @@ for (let i = 1; i <= images_Jump; i++) {
 //=== main loop===
 function animate() {
         ctx.clearRect(0, 0, canvas.width, canvas.height); // animate() runs every frame; clearRect() clears previous frame
+        
+        //=== BACKGROUND MOVEMENT ===
+        if (isRunning) {
+            bgX -= bgSpeed;
+        }
+        if (bgX <= -canvas.width) {
+            bgX = 0;
+        }
+
+        //=== Draw Background (LOOPED)===
+        ctx.drawImage(backgroundImage, bgX, 0, canvas.width,  canvas.height);
+        ctx.drawImage(backgroundImage, bgX + canvas.width, 0, canvas.width,  canvas.height);
 
         //=== Update ground if canvas resized ===
 GROUND_Y = canvas.height - playerHeight - FLOOR_OFFSET;
