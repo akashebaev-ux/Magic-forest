@@ -29,7 +29,7 @@ const playerHeight = 300; // sprite size
 
 //=== the main character's position  === 
 const Player_Start_X = 150; // fixed horizontal position (player stays)
-const FLOOR_OFFSET = 50;
+const FLOOR_OFFSET = 150;
 let GROUND_Y = canvas.height - playerHeight - FLOOR_OFFSET; // floor position
 const GRAVITY = 1; // pulls player down every frame
 const JUMP_FORCE = 20; // how strong jump is 
