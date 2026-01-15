@@ -41,6 +41,10 @@ const bgSpeed = 6;
 const obstacleImage = new Image();
 obstacleImage.src = "assets/images/stone.png";
 
+//=== RANDOM SPAWN SETTINGS ===
+const MIN_OBSTACLE_GAP = 300; // minimum gap between obstacles
+const MAX_OBSTACLE_GAP = 600; // maximum gap between obstacles
+
 //=== HIT SOUND ===
 const hitSound = new Audio("");
 hitSound.volume = 0.5; 
@@ -102,6 +106,15 @@ const obstacle = {
     active: true // obstacle disappears after passing
 };
 
+//=== OBSTACLE  RESPAWN FUNCTION ===
+function respawnObstacle() {
+    obstacle.x = canvas.width + 
+    Math.random() * (MAX_OBSTACLE_GAP - MIN_OBSTACLE_GAP) + 
+    MIN_OBSTACLE_GAP;
+
+    obstacle.active = true;
+}
+
 //=== RESET GAME ===
 function resetGame() {
     playerY = GROUND_Y;
@@ -133,8 +146,15 @@ function animate() {
         //=== MOVE WORLD ===
         if (isRunning && !gameOver) {
             bgX -= bgSpeed;
-         obstacle.x -= bgSpeed; // Move obstacle with background
+         if (obstacle.active) {obstacle.x -= bgSpeed;} // Move obstacle with background
+
+         //=== RESPAWN WHEN OFF SCREEN ===
+        if (obstacle.x + obstacle.width < 0) {
+            respawnObstacle();
         }
+    }
+       
+
         if (bgX <= -canvas.width) {
             bgX = 0;
         }
@@ -243,6 +263,7 @@ const collision =
 //=== GAME OVER ===
 if (collision && !gameOver) {
     gameOver = true;
+    obstacle.active = false; // hide obstacle
     isRunning = false;
     hitSound.currentTime = 0;
     hitSound.play();
