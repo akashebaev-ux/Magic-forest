@@ -29,6 +29,9 @@ let gameOver = false;
 let score = 0;
 let scoreTimer = 0;
 
+let gameWon = false;
+let winPlayed = false;
+
 
 //=== BACKGROUND IMAGE ===
 const backgroundImage = new Image();
@@ -48,6 +51,10 @@ const MAX_OBSTACLE_GAP = 600; // maximum gap between obstacles
 //=== HIT SOUND ===
 const hitSound = new Audio("");
 hitSound.volume = 0.5; 
+
+//=== WIN SOUND ===
+const winSound = new Audio("");
+winSound.volume = 0.5;
 
 //=== STEP 3 PLAYER POSITION AND PHYSICS ===
 
@@ -75,6 +82,7 @@ let rightKeyHeld = false;
 
 let runFrame = 0; // controls running animation 
 let jumpFrame = 0; // controls jumping animation 
+let winAnimFrame = 0; // controls winning animation
 
 //=== STEP 6 LOAD RUN IMAGES ===
 
@@ -125,6 +133,7 @@ function resetGame() {
 
     runFrame = 0;
     jumpFrame = 0;
+    winAnimFrame = 0; 
 
     obstacle.x = canvas.width + 300;
     obstacle.active = true;
@@ -135,6 +144,8 @@ function resetGame() {
     scoreTimer = 0;
 
     gameOver = false;
+    gameWon = false;
+    winPlayed = false;
 }
 
 // STEP 8  MAIN GAME LOOP (CORE OF EVERYTHING)
@@ -144,7 +155,7 @@ function animate() {
         ctx.clearRect(0, 0, canvas.width, canvas.height); // animate() runs every frame; clearRect() clears previous frame
         
         //=== MOVE WORLD ===
-        if (isRunning && !gameOver) {
+        if (isRunning && !gameOver && !gameWon) {
             bgX -= bgSpeed;
          if (obstacle.active) {obstacle.x -= bgSpeed;} // Move obstacle with background
 
@@ -236,6 +247,43 @@ ctx.fillStyle = "white";
 ctx.font = "20px Arial";
 ctx.fillText(`Score: ${score}`, 30, 50);
 
+//=== WIN CONDITION ===
+if (score > 100 && !gameWon && !gameOver) {
+    gameWon = true;
+    isRunning = false;
+    obstacle.active = false; // hide obstacle
+if (!winPlayed) {
+    winSound.currentTime = 0;
+    winSound.play();
+    winPlayed = true;
+    }
+}
+
+//=== WIN SCREEN (ANIMATED) ===
+if (gameWon) {
+    winAnimFrame++;
+    ctx.fillStyle = "rgba(0, 0, 0, 0.65)";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    const bounce = Math.sin(winAnimFrame * 0.08) * 20;
+    const glow = Math.abs(Math.sin(winAnimFrame * 0.05)) * 30;
+
+    ctx.textAlign = "center";
+    ctx.font = "80px Arial Black";
+    ctx.shadowColor = "gold";
+    ctx.shadowBlur = glow;
+    ctx.fillStyle = "gold";
+    ctx.fillText("YOU WIN!", canvas.width / 2, canvas.height / 2 - 40 + bounce);
+
+    ctx.shadowBlur = 0;
+    ctx.font = "36px Arial";
+    ctx.fillStyle = "white";
+    ctx.fillText("Press R to Restart", canvas.width / 2, canvas.height / 2 + 40);
+    ctx.textAlign = "left";
+
+    return;
+}
+
 //=== STEP 8.4 COLLISION DETECTION ===
 const playerBox = {
     x: Player_Start_X + 200,
@@ -261,7 +309,7 @@ const collision =
 
  
 //=== GAME OVER ===
-if (collision && !gameOver) {
+if (collision && !gameOver && !gameWon) {
     gameOver = true;
     obstacle.active = false; // hide obstacle
     isRunning = false;
@@ -283,8 +331,7 @@ if (gameOver) {
     ctx.font = "36px Arial";
     ctx.fillText("Press R to Restart", canvas.width / 2, canvas.height / 2 + 40);
     ctx.textAlign = "left";
-
-    return;
+ 
 } 
 requestAnimationFrame(animate);
 }
@@ -296,7 +343,7 @@ document.addEventListener("keydown", (e) => {
 
 //=== RESTART ===
 
-if (gameOver && e.code === "KeyR") {
+if (gameOver || gameWon && e.code === "KeyR") {
     resetGame();
     animate();
     return;
