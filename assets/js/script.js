@@ -281,6 +281,7 @@ if (gameWon) {
     ctx.fillText("Press R to Restart", canvas.width / 2, canvas.height / 2 + 40);
     ctx.textAlign = "left";
 
+     requestAnimationFrame(animate); // ✅ KEEP LOOP ALIVE
     return;
 }
 
@@ -344,8 +345,7 @@ document.addEventListener("keydown", (e) => {
 //=== RESTART ===
 
 if (gameOver || gameWon && e.code === "KeyR") {
-    resetGame();
-    animate();
+    resetGame(); 
     return;
 }
 
