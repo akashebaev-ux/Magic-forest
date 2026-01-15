@@ -24,6 +24,12 @@ const staggerFrames = 14;
 const playerWidth = 400; // sprite size 
 const playerHeight = 400; // sprite size
 
+//=== GAME STATE and SCORE ===
+let gameOver = false;
+let score = 0;
+let scoreTimer = 0;
+
+
 //=== BACKGROUND IMAGE ===
 const backgroundImage = new Image();
 backgroundImage.src = "assets/images/BG.png";
@@ -35,6 +41,9 @@ const bgSpeed = 6;
 const obstacleImage = new Image();
 obstacleImage.src = "assets/images/stone.png";
 
+//=== HIT SOUND ===
+const hitSound = new Audio("");
+hitSound.volume = 0.5; 
 
 //=== STEP 3 PLAYER POSITION AND PHYSICS ===
 
@@ -49,13 +58,13 @@ const JUMP_FORCE = 22; // how strong jump is
 
 let isJumping = false; // player is in the air
 let isRunning = false; // right key held
-let isBlocked = false; // stops player after collision 
+
 
 let playerY = GROUND_Y; // vertical position
 let velocityY = 0; // vertical speed
 
 let rightKeyHeld = false;
-let obstaclePassed = false;
+
 
 
 //STEP 5 ANIMATION FRAME COUNTERS
@@ -93,6 +102,28 @@ const obstacle = {
     active: true // obstacle disappears after passing
 };
 
+//=== RESET GAME ===
+function resetGame() {
+    playerY = GROUND_Y;
+    velocityY = 0;
+    isJumping = false;
+    isRunning = false;
+    rightKeyHeld = false;
+
+    runFrame = 0;
+    jumpFrame = 0;
+
+    obstacle.x = canvas.width + 300;
+    obstacle.active = true;
+    
+
+    bgX = 0;
+    score = 0;
+    scoreTimer = 0;
+
+    gameOver = false;
+}
+
 // STEP 8  MAIN GAME LOOP (CORE OF EVERYTHING)
 
 //=== main loop===
@@ -100,7 +131,7 @@ function animate() {
         ctx.clearRect(0, 0, canvas.width, canvas.height); // animate() runs every frame; clearRect() clears previous frame
         
         //=== MOVE WORLD ===
-        if (isRunning && !isBlocked) {
+        if (isRunning && !gameOver) {
             bgX -= bgSpeed;
          obstacle.x -= bgSpeed; // Move obstacle with background
         }
@@ -119,14 +150,15 @@ obstacle.y = GROUND_Y + playerHeight - obstacle.height; // Update obstacle Y pos
 
 
 // STEP 8.1 GRAVITY AND FALLING ===
-
-velocityY += GRAVITY; // Apply gravity
-playerY += velocityY; // Update player vertical position
+if (!gameOver) {
+    velocityY += GRAVITY; // Apply gravity
+    playerY += velocityY; // Update player vertical position
+}
 
 // === STEP 8.2 GROUND COLLISION ===
 
 // Check for ground collision (Prevents falling through floor)
-if (playerY >= GROUND_Y) {
+if (playerY >= GROUND_Y && !gameOver) {
     playerY = GROUND_Y;
     velocityY = 0;
     isJumping = false;
@@ -173,6 +205,17 @@ ctx.drawImage(
     );
 }
 
+//=== SCORE ===
+if (isRunning && !gameOver) {
+
+    scoreTimer++;
+    if (scoreTimer % 10 === 0) score++;
+}
+
+ctx.fillStyle = "white";
+ctx.font = "20px Arial";
+ctx.fillText(`Score: ${score}`, 30, 50);
+
 //=== STEP 8.4 COLLISION DETECTION ===
 const playerBox = {
     x: Player_Start_X + 200,
@@ -196,34 +239,32 @@ const collision =
     playerBox.y < obstacleBox.y + obstacleBox.height &&
     playerBox.y + playerBox.height > obstacleBox.y;
 
-//=== stop player if hit without jumping ===
-const onGround = playerY >= GROUND_Y;
-
-if (obstacle.active &&collision && !isJumping && onGround) {
-    isBlocked = true;
+ 
+//=== GAME OVER ===
+if (collision && !gameOver) {
+    gameOver = true;
     isRunning = false;
-}
-  if (!obstaclePassed && obstacle.x + obstacle.width < Player_Start_X + 50) {
-        obstaclePassed = true;
-        obstacle.active = false;
-        isBlocked = false;
+    hitSound.currentTime = 0;
+    hitSound.play();
+} 
 
-        if (rightKeyHeld) isRunning = true;
-    }
+// === GAME OVER SCREEN ===
+if (gameOver) {
+    ctx.fillStyle = "rgba(0, 0, 0, 0.6)";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
 
+    ctx.fillStyle = "white";
+    ctx.textAlign ="center";
 
+    ctx.font = "72px Arial";
+    ctx.fillText("GAME OVER", canvas.width / 2, canvas.height / 2 - 40);
+    
+    ctx.font = "36px Arial";
+    ctx.fillText("Press R to Restart", canvas.width / 2, canvas.height / 2 + 40);
+    ctx.textAlign = "left";
 
-
-    //=== RESET OBSTACLE WHEN OFF SCREEN ===
-if (obstacle.x + obstacle.width < 0) {
-    obstacle.x = canvas.width + Math.random() * 500;
-    obstacle.active = true;
-    isBlocked = false;
-        obstaclePassed = false;
-     if (rightKeyHeld) isRunning = true;
-}
-
-
+    return;
+} 
 requestAnimationFrame(animate);
 }
 animate();
@@ -232,14 +273,22 @@ animate();
 
 document.addEventListener("keydown", (e) => {
 
+//=== RESTART ===
+
+if (gameOver && e.code === "KeyR") {
+    resetGame();
+    animate();
+    return;
+}
+
     // Jump
-    if ((e.code === "ArrowUp" || e.code === "Space") && !isJumping) {
+    if ((e.code === "ArrowUp" || e.code === "Space") && !isJumping && !gameOver) {
        isJumping = true; // Trigger jump
          velocityY = -JUMP_FORCE; // Apply jump force
         jumpFrame = 0;
     } 
     // Run
-    if (e.code === "ArrowRight") {
+    if (e.code === "ArrowRight" && !gameOver) {
          rightKeyHeld = true;
          isRunning = true;
        
@@ -252,3 +301,4 @@ document.addEventListener("keydown", (e) => {
         isRunning = false;
     }
 }); 
+
