@@ -4,16 +4,41 @@ const canvas = document.getElementById("backgroundCanvas"); //== gets the canvas
 const ctx = canvas.getContext("2d"); //== drawing tool (draw images, shapes, clear screen)
 
 //=== canvas size - full screen===
+let scale = 1;
+
 
 function resizeCanvas() {
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
-}
 
+  scale = canvas.width / 1920; // base width
+}
+//=== canvas resize ===
 resizeCanvas();
 window.addEventListener("resize", resizeCanvas);
+window.addEventListener("orientationchange", resizeCanvas);
 
 //===STEP 2 GAME SETTINGS ===
+
+
+//=== aspect ration ===
+
+function getAspectRatio() {
+    return canvas.height / canvas.width;
+}
+
+// === responsive floor offset ===
+function getFloorOffset() {
+    const ratio = getAspectRatio();
+    if (ratio > 1.9) return 1100 * scale; // very tall phones
+    if (ratio > 1.6) return 1100 * scale; // normal phones
+    if (ratio > 1.2) return 780 * scale; // tablets 
+    return 260 * scale; // desktop
+}
+//=== mobile-safe bottom zone ===
+function getBottomSafeZone() {
+    return getAspectRatio() > 1.6 ? 80 * scale : 0;
+}
 
  //=== Image Preloading settings ===
 const images_RUN = 15; // number of running images
@@ -21,8 +46,23 @@ const images_Jump = 11; // number of jumping images
 //=== to slower the image ===
 const staggerFrames = 14;
 
-const playerWidth = 400; // sprite size 
-const playerHeight = 400; // sprite size
+//=== RESPONSIVE PLAYER SIZE ===
+const BASE_PLAYER_SIZE = 400; // sprite size
+
+const getPlayerWidth = () => BASE_PLAYER_SIZE * scale;
+const getPlayerHeight = () => BASE_PLAYER_SIZE * scale; 
+
+// === gravity adapts to screen shape ===
+function getGravity() {
+    return BASE_GRAVITY * scale * (getAspectRatio() > 1.6 ? 0.85 : 1);
+}
+
+//=== jump adapts to screen shape ===
+function getJumpForce() {
+    return BASE_JUMP_FORCE * scale * (getAspectRatio() > 1.6 ? 1.15 : 1);
+}
+
+
 
 //=== GAME STATE and SCORE ===
 let gameOver = false;
@@ -59,22 +99,22 @@ winSound.volume = 0.5;
 //=== STEP 3 PLAYER POSITION AND PHYSICS ===
 
 //=== the main character's position  === 
-const Player_Start_X = 150; // fixed horizontal position (player stays)
-const FLOOR_OFFSET = 180;
-let GROUND_Y = canvas.height - playerHeight - FLOOR_OFFSET; // floor position
-const GRAVITY = 0.9; // pulls player down every frame
-const JUMP_FORCE = 22; // how strong jump is 
+const getPlayerStartX = () =>  canvas.width * 0.08;  // fixed horizontal position (player stays)
 
-//=== STEP 4 PLAYER STATE VARIABLES ===
+let GROUND_Y = 0; // floor position
+const BASE_GRAVITY = 0.9; // pulls player down every frame
+const BASE_JUMP_FORCE = 22; // how strong jump is 
 
-let isJumping = false; // player is in the air
-let isRunning = false; // right key held
+ 
+//=== STEP 4 PLAYER STATE VARIABLES === 
 
 
-let playerY = GROUND_Y; // vertical position
+let playerY = 0; // vertical position
 let velocityY = 0; // vertical speed
-
+let isJumping = false; // player is in the air
+let isRunning = false; // right key held 
 let rightKeyHeld = false;
+
 
 
 
@@ -82,7 +122,7 @@ let rightKeyHeld = false;
 
 let runFrame = 0; // controls running animation 
 let jumpFrame = 0; // controls jumping animation 
-let winAnimFrame = 0; // controls winning animation
+
 
 //=== STEP 6 LOAD RUN IMAGES ===
 
@@ -107,8 +147,8 @@ for (let i = 1; i <= images_Jump; i++) {
 
 //=== STEP 7.5 OBSTACLE SETTINGS ===
 const obstacle = {
-    x: canvas.width + 300, // starts off screen
-    y: GROUND_Y + 150,
+    x: canvas.width + 600, // starts off screen
+    y: 0,
     width: 300,
     height: 200, // starts off screen
     active: true // obstacle disappears after passing
@@ -117,8 +157,8 @@ const obstacle = {
 //=== OBSTACLE  RESPAWN FUNCTION ===
 function respawnObstacle() {
     obstacle.x = canvas.width + 
-    Math.random() * (MAX_OBSTACLE_GAP - MIN_OBSTACLE_GAP) + 
-    MIN_OBSTACLE_GAP;
+    (Math.random() * (MAX_OBSTACLE_GAP - MIN_OBSTACLE_GAP) + 
+    MIN_OBSTACLE_GAP) * scale;
 
     obstacle.active = true;
 }
@@ -154,13 +194,21 @@ function resetGame() {
 function animate() {
         ctx.clearRect(0, 0, canvas.width, canvas.height); // animate() runs every frame; clearRect() clears previous frame
         
+        const playerWidth = getPlayerWidth();
+        const playerHeight = getPlayerHeight();
+
+        GROUND_Y=canvas.height - playerHeight - getFloorOffset() - getBottomSafeZone();
+
+        // === RESPONSIVE CHANGE: update ground every frame ===
+       
+        obstacle.y = GROUND_Y + playerHeight - obstacle.height * scale; // Update obstacle Y position
         //=== MOVE WORLD ===
         if (isRunning && !gameOver && !gameWon) {
-            bgX -= bgSpeed;
-         if (obstacle.active) {obstacle.x -= bgSpeed;} // Move obstacle with background
+            bgX -= bgSpeed * scale;
+         if (obstacle.active) {obstacle.x -= bgSpeed * scale;} // Move obstacle with background
 
          //=== RESPAWN WHEN OFF SCREEN ===
-        if (obstacle.x + obstacle.width < 0) {
+        if (obstacle.x + obstacle.width * scale < 0) {
             respawnObstacle();
         }
     }
@@ -174,15 +222,12 @@ function animate() {
         ctx.drawImage(backgroundImage, bgX, 0, canvas.width,  canvas.height);
         ctx.drawImage(backgroundImage, bgX + canvas.width, 0, canvas.width,  canvas.height);
 
-        //=== Update ground if canvas resized ===
-GROUND_Y = canvas.height - playerHeight - FLOOR_OFFSET;
-obstacle.y = GROUND_Y + playerHeight - obstacle.height; // Update obstacle Y position
-
+    
 
 
 // STEP 8.1 GRAVITY AND FALLING ===
 if (!gameOver) {
-    velocityY += GRAVITY; // Apply gravity
+    velocityY += getGravity(); // Apply gravity
     playerY += velocityY; // Update player vertical position
 }
 
@@ -218,9 +263,9 @@ else if (isRunning) {
     image = playerRunImages[0];
 }
 
-// === DRAW PLAYER ===
+// === DRAW PLAYER responsive X ===
 ctx.drawImage(image, 
-    Player_Start_X, 
+    getPlayerStartX(), 
     playerY, playerWidth, playerHeight
 );
 
@@ -231,8 +276,8 @@ ctx.drawImage(
     obstacleImage, 
     obstacle.x, 
     obstacle.y, 
-    obstacle.width, 
-    obstacle.height
+    obstacle.width * scale, 
+    obstacle.height * scale
     );
 }
 
@@ -242,10 +287,10 @@ if (isRunning && !gameOver) {
     scoreTimer++;
     if (scoreTimer % 10 === 0) score++;
 }
-
+// === RESPONSIVE CHANGE scaled text ===
 ctx.fillStyle = "white";
-ctx.font = "20px Arial";
-ctx.fillText(`Score: ${score}`, 30, 50);
+ctx.font = `${20 * scale}px Arial`;
+ctx.fillText(`Score: ${score}`, 30 * scale, 50 * scale);
 
 //=== WIN CONDITION ===
 if (score > 100 && !gameWon && !gameOver) {
@@ -287,18 +332,18 @@ if (gameWon) {
 
 //=== STEP 8.4 COLLISION DETECTION ===
 const playerBox = {
-    x: Player_Start_X + 200,
-    y: playerY + 40,
-    width: playerWidth - 250,
-    height: playerHeight - 150
+    x: getPlayerStartX() + 200 * scale,
+    y: playerY + 40 * scale,
+    width: playerWidth - 250 * scale,
+    height: playerHeight - 150 * scale
 };
 
 
 const obstacleBox = {
-    x: obstacle.x + 100,
-    y: obstacle.y + 80,
-    width: obstacle.width - 220,
-    height: obstacle.height - 150
+    x: obstacle.x + 80 * scale,
+    y: obstacle.y + 80 * scale,
+    width: obstacle.width - 280 * scale,
+    height: obstacle.height - 180 * scale
 };
 
 
@@ -332,8 +377,9 @@ if (gameOver) {
     ctx.font = "36px Arial";
     ctx.fillText("Press R to Restart", canvas.width / 2, canvas.height / 2 + 40);
     ctx.textAlign = "left";
- 
+
 } 
+
 requestAnimationFrame(animate);
 }
 animate();
@@ -352,7 +398,7 @@ if ((gameOver || gameWon) && e.code === "KeyR") {
     // Jump
     if ((e.code === "ArrowUp" || e.code === "Space") && !isJumping && !gameOver) {
        isJumping = true; // Trigger jump
-         velocityY = -JUMP_FORCE; // Apply jump force
+         velocityY = -getJumpForce(); // Apply jump force
         jumpFrame = 0;
     } 
     // Run
@@ -370,3 +416,19 @@ if ((gameOver || gameWon) && e.code === "KeyR") {
     }
 }); 
 
+//=== RESPONSIVE CHANGE: MOBILE TOUCH CONTROLS ===
+canvas.addEventListener("touchstart", (e) => {
+    e.preventDefault();
+
+    // Jump
+    if (!isJumping) {
+        isJumping = true; // Trigger jump
+        velocityY = -getJumpForce(); // Apply jump force
+        
+    }
+    isRunning = true;
+});
+
+canvas.addEventListener("touchend", (e) => {
+    isRunning = false;
+});
