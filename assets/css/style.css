@@ -25,10 +25,13 @@ html, body {
     z-index: 0;
 }
 
-header {
-    background: rgba(255, 255, 255, 0.8);
+header { 
     padding: 10px 20px;
     text-align: center;
+    color: gold;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+    font-family: "Great Vibes", cursive;
+    font-size: 70px;
 }
 
 /* Play Button Styles */
