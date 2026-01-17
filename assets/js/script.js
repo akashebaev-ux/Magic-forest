@@ -89,11 +89,11 @@ const MIN_OBSTACLE_GAP = 300; // minimum gap between obstacles
 const MAX_OBSTACLE_GAP = 600; // maximum gap between obstacles
 
 //=== HIT SOUND ===
-const hitSound = new Audio("");
+const hitSound = new Audio("assets/audio/cartoon-wet-hit-352447.mp3");
 hitSound.volume = 0.5; 
 
 //=== WIN SOUND ===
-const winSound = new Audio("");
+const winSound = new Audio("assets/audio/winner-game-sound-404167.mp3");
 winSound.volume = 0.5;
 
 //=== STEP 3 PLAYER POSITION AND PHYSICS ===
