@@ -7,11 +7,9 @@ html, body {
     overflow: hidden;
 }
 
-#gameControls {
-    position: fixed;
-    inset: 0;
-    z-index: 10;
-    pointer-events: auto;
+#gameControls { 
+
+    pointer-events: none;
 }
 
 .background-image {
@@ -53,9 +51,7 @@ header {
 /* Styles for the game page */
 #backgroundCanvas {
     position: fixed;
-    inset: 0;   
-    width: 100vw;
-    height: 100vh; 
+    inset: 0;    
    background-image: url(../images/BG.webp);
    background-size: cover;
    background-position: center;
@@ -78,6 +74,7 @@ header {
     text-decoration: none;
     color: black;
     font-weight: bold;
+    pointer-events: auto;
 }
 
 
