@@ -432,6 +432,5 @@ canvas.addEventListener("touchstart", (e) => {
 }, {passive: false});
 
 canvas.addEventListener("touchend", (e) => {
-    touchHeld = false;
-    isRunning = false;
+    touchHeld = false; 
 });
