@@ -75,7 +75,7 @@ let winPlayed = false;
 
 //=== BACKGROUND IMAGE ===
 const backgroundImage = new Image();
-backgroundImage.src = "assets/images/BG.png";
+backgroundImage.src = "assets/images/BG.webp";
 
 let bgX = 0;
 const bgSpeed = 6;
