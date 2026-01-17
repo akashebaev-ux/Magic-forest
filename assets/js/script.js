@@ -32,7 +32,7 @@ function getFloorOffset() {
     const ratio = getAspectRatio();
     if (ratio > 1.9) return 1100 * scale; // very tall phones
     if (ratio > 1.6) return 900 * scale; // normal phones
-    if (ratio > 1.2) return 780 * scale; // tablets 
+    if (ratio > 1.2) return 700 * scale; // tablets 
     return 260 * scale; // desktop
 }
 //=== mobile-safe bottom zone ===
@@ -203,7 +203,7 @@ function animate() {
        
         obstacle.y = GROUND_Y + playerHeight - obstacle.height * scale; // Update obstacle Y position
         //=== MOVE WORLD ===
-        if (isRunning || touchHeld && !gameOver && !gameWon) {
+        if ((isRunning || touchHeld) && !gameOver && !gameWon) {
             bgX -= bgSpeed * scale;
          if (obstacle.active) {obstacle.x -= bgSpeed * scale;} // Move obstacle with background
 
@@ -428,10 +428,10 @@ canvas.addEventListener("touchstart", (e) => {
         isJumping = true; // Trigger jump
         velocityY = -getJumpForce(); // Apply jump force
         jumpFrame = 0;
-    } isRunning = false;
+    } 
 }, {passive: false});
 
 canvas.addEventListener("touchend", (e) => {
     touchHeld = false;
-    
+    isRunning = false;
 });
