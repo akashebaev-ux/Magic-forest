@@ -1,3 +1,4 @@
+/* jshint esversion: 6 */
 
 //=== STEP 1 CANVAS ===
 const canvas = document.getElementById("backgroundCanvas"); //== gets the canvas from HTML
@@ -33,7 +34,7 @@ function getFloorOffset() {
     if (ratio > 1.9) return 1100 * scale; // very tall phones
     if (ratio > 1.6) return 900 * scale; // normal phones
     if (ratio > 1.2) return 700 * scale; // tablets 
-    return 260 * scale; // desktop
+    return 230 * scale; // desktop
 }
 //=== mobile-safe bottom zone ===
 function getBottomSafeZone() {
@@ -78,7 +79,7 @@ const backgroundImage = new Image();
 backgroundImage.src = "assets/images/BG.webp";
 
 let bgX = 0;
-const bgSpeed = 6;
+const bgSpeed = 8;
 
 //=== OBSTACLE IMAGE === 
 const obstacleImage = new Image();
@@ -122,7 +123,7 @@ let touchHeld = false;
 
 let runFrame = 0; // controls running animation 
 let jumpFrame = 0; // controls jumping animation 
-
+let winAnimFrame = 0;
 
 //=== STEP 6 LOAD RUN IMAGES ===
 
