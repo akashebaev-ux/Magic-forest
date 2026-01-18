@@ -6,6 +6,8 @@ Players explore an enchanted forest, overcome obstacles, and interact with magic
 
 <img  src="https://github.com/user-attachments/assets/57936b19-966c-4280-844f-982794f88d55" width="600">
 
+Here is the game link: (https://akashebaev-ux.github.io/Magic-forest/)
+
 ---
 
 ## 📖 Overview
