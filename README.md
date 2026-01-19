@@ -6,6 +6,8 @@ Players explore an enchanted forest, overcome obstacles, and interact with magic
 
 <img  src="https://github.com/user-attachments/assets/57936b19-966c-4280-844f-982794f88d55" width="600">
 
+Here is the game link: (https://akashebaev-ux.github.io/Magic-forest/)
+
 ---
 
 ## 📖 Overview
@@ -140,6 +142,11 @@ The game is designed as a simple, forward-moving challenge:
 * When the player reaches a **score of 100**, a **win screen animation** appears, accompanied by a winning sound effect.
 
 * The player can press **R** to restart the game after winning.
+  
+
+  <img  src="https://github.com/user-attachments/assets/2d496e95-0db1-40f6-9f0a-966be53aa80a" width="600">
+
+
 
 If the player fails to jump over an obstacle:
 
@@ -148,6 +155,10 @@ If the player fails to jump over an obstacle:
 * A hit sound effect is played.
 
 * The player can press **R** to restart the game.
+  
+
+  <img  src="https://github.com/user-attachments/assets/2645b147-0448-4f07-a1d0-176da788d8a3" width="600">
+
 
 # Controls
 
@@ -221,7 +232,7 @@ Magic Forest is built with:
 - [Amiresponsive](https://ui.dev/amiresponsive) – Used to display how the website appears across multiple device sizes.
 - [Pixverse.ai](https://app.pixverse.ai/onboard) – Used to generate the custom AI-created video.
 - [Ezgif](https://ezgif.com/video-to-gif) - Used to generate the GIF images.
-  
+- [FreeConvert](https://www.freeconvert.com/) – Used to change the image format from PNG to WebP.
 - [ImageColorPicker.com](https://imagecolorpicker.com/) – Used to select and refine colour values for the game design.
 - [miniWebtool] (ru.miniwebtool.com) – Used to extract sprite images from animation videos.
 - [Carve.Photos](carve.photos) – Used to remove image backgrounds and create transparent assets.
@@ -371,8 +382,7 @@ To ensure code quality, I validated every HTML page and the CSS file using the o
 
 |   |   |
 |---|---|
-
-|<img  src="https://github.com/user-attachments/assets/092ff79e-600c-4653-aefd-b5b516901810" width="300">|<img  src="https://github.com/user-attachments/assets/676018f2-2553-4145-98a2-041e899baefe" width="300">|
+|<img  src="https://github.com/user-attachments/assets/092ff79e-600c-4653-aefd-b5b516901810" width="600">|<img  src="https://github.com/user-attachments/assets/676018f2-2553-4145-98a2-041e899baefe" width="600">|
 
 
 ----
@@ -382,9 +392,13 @@ CSS validator [Jigsaw](https://jigsaw.w3.org/css-validator/validator)
 <img src="https://github.com/user-attachments/assets/db51eff5-3b6f-4b27-b0b5-4a9a24810fbd" width="600">
 
 
-**Note:** .scroll-gallery::-webkit-scrollbar { display: none; } was used to apply custom styles to the scrollbar and hide it while preserving its primary functionality. 
+**Note:** .scroll-gallery::-webkit-scrollbar { display: none; } was used to apply custom styles to the scrollbar and hide it while preserving its primary functionality.
 
-JavaScript 
+---
+
+JavaScript validator JSHint [JSHint](https://jshint.com/)
+
+<img  src="https://github.com/user-attachments/assets/363c0c2e-f9de-4c79-a845-616642bd9a72" width="600">
 
 
 # 7. Credits
