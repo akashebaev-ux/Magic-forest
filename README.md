@@ -4,7 +4,8 @@
 **Magic Forest** is a browser-based interactive game for kids.
 Players explore an enchanted forest, overcome obstacles, and interact with magical elements in a rich, immersive environment.
 
-<img  src="https://github.com/user-attachments/assets/57936b19-966c-4280-844f-982794f88d55" width="600">
+<img  src="https://github.com/user-attachments/assets/28e5bf80-6702-41fd-9d39-3d9644561a07" width="600">
+
 
 Here is the game link: (https://akashebaev-ux.github.io/Magic-forest/)
 
@@ -122,7 +123,8 @@ The **Magic Forest** game consists of **two main pages**, accessible via the **H
 **Home Page**
 Presents general information about the game and includes a **Play** button that allows users to start the game.
 
-<img src="https://github.com/user-attachments/assets/b090dcee-15e3-45ae-8121-fe8012a22734" width="600">
+<img  src="https://github.com/user-attachments/assets/c15657a8-95d3-4fa9-971b-7b28cc3db28d" width="600">
+
 
 
 **Game Page**
