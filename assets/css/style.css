@@ -100,10 +100,18 @@ header {
 
 /* MEDIA QUERIES */
 
+/* Mobile phones (≤ 400px) */
+@media (max-width: 400px) {
+    header > h1 {
+        font-size: 40px;
+        padding: 8px 12px;
+    }
+}
+
 /* Mobile phones (≤ 600px) */
 @media (max-width: 600px) {
-    header {
-        font-size: 40px;
+    header > h1 {
+        font-size: 60px;
         padding: 8px 12px;
     }
 
@@ -122,8 +130,9 @@ header {
 
 /* Tablets (601px – 900px) */
 @media (min-width: 601px) and (max-width: 900px) {
-    header {
-        font-size: 55px;
+    header > h1{
+        font-size: 70px;
+        padding: 10px 16px;
     }
 
     #playButton {
@@ -139,7 +148,7 @@ header {
 /* Laptops (901px – 1200px) */
 @media (min-width: 901px) and (max-width: 1200px) {
     header {
-        font-size: 65px;
+        font-size: 60px;
     }
 
   

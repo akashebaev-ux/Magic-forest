@@ -324,7 +324,7 @@ if (gameWon) {
     ctx.shadowBlur = 0;
     ctx.font = "36px Arial";
     ctx.fillStyle = "white";
-    ctx.fillText("Press R to Restart", canvas.width / 2, canvas.height / 2 + 40);
+    ctx.fillText("Tap to Restart", canvas.width / 2, canvas.height / 2 + 40);
     ctx.textAlign = "left";
 
      requestAnimationFrame(animate);
@@ -376,7 +376,7 @@ if (gameOver) {
     ctx.fillText("GAME OVER", canvas.width / 2, canvas.height / 2 - 40);
     
     ctx.font = "36px Arial";
-    ctx.fillText("Press R to Restart", canvas.width / 2, canvas.height / 2 + 40);
+    ctx.fillText("Tap to Restart", canvas.width / 2, canvas.height / 2 + 40);
     ctx.textAlign = "left";
 
 } 
@@ -420,6 +420,11 @@ if ((gameOver || gameWon) && e.code === "KeyR") {
 //=== RESPONSIVE CHANGE: MOBILE TOUCH CONTROLS ===
 canvas.addEventListener("touchstart", (e) => {
     e.preventDefault();
+
+    if(gameOver || gameWon) {
+        resetGame();
+        return;
+    }
 
     touchHeld = true;
     isRunning = true;
