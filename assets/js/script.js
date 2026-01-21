@@ -343,8 +343,8 @@ const playerBox = {
 const obstacleBox = {
     x: obstacle.x + 80 * scale,
     y: obstacle.y + 80 * scale,
-    width: obstacle.width - 280 * scale,
-    height: obstacle.height - 180 * scale
+    width: (obstacle.width - 280 * scale) * (canvas.width < 900 ? 0.20 : 1),
+    height: (obstacle.height - 180 * scale) * (canvas.width < 900 ? 0.20 : 1)
 };
 
 
