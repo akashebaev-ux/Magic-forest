@@ -315,31 +315,32 @@ This project is deployed via **GitHub Pages**:
 - [x] Create home page<br>
 - [x] Create background image<br>
 - [x] Basic project structure<br>
-- [x] Player placeholder sprite images |
-<div align="center">
-  <img src="https://github.com/user-attachments/assets/e95e962f-1192-489b-8da4-8c191586a204" width="240" height="200" style="object-fit: cover;">
-  <img src="https://github.com/user-attachments/assets/b11df667-64fd-4b13-94dd-f6cddf057a30" width="240" height="200" style="object-fit: cover;">
-</div><br>
+- [x] Player placeholder sprite images<br><br>
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/e95e962f-1192-489b-8da4-8c191586a204" width="240" height="200" style="object-fit: cover; display: block;">
+  <img src="https://github.com/user-attachments/assets/b11df667-64fd-4b13-94dd-f6cddf057a30" width="240" height="200" style="object-fit: cover; display: block;">
+</p>
 ✔ The layout is fully responsive and displays correctly across multiple devices and modern browsers. |
 | **2. As a user, I want to see the core mechanics.**<br><br>
 - [x] Player movement (run + jump)<br>
 - [x] Gravity & physics<br>
-- [x] Collision detection |
-<div align="center">
-  <img src="https://github.com/user-attachments/assets/3ac7ebd9-b620-49a5-a2ab-d4b51b6a5e8b" width="240" height="200" style="object-fit: cover;">
-</div><br>
-✔ Met. All core mechanics—player movement, gravity and physics, and collision detection—are fully implemented and function as intended, allowing users to clearly experience the fundamental gameplay systems. |
+- [x] Collision detection<br><br>
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/3ac7ebd9-b620-49a5-a2ab-d4b51b6a5e8b" width="240" height="200" style="object-fit: cover; display: block;">
+</p>
+✔ Met. All core mechanics—player movement, gravity and physics, and collision detection—are fully implemented and function as intended. |
 | **3. As a user, I want to experience a polished and interactive interface.**<br><br>
 - [x] Animations<br>
 - [x] Sound effects<br>
 - [x] Background music<br>
 - [x] UI (score, lives, timer)<br>
-- [x] Bug fixes |
-<div align="center">
-  <img src="https://github.com/user-attachments/assets/0cc115c8-afea-438d-bfb2-826a25f8783b" width="240" height="200" style="object-fit: cover;">
-  <img src="https://github.com/user-attachments/assets/0494554c-8f45-4cdd-ae09-8cccfe45559e" width="240" height="200" style="object-fit: cover;">
-</div><br>
-✔ *Partially met.* Core gameplay elements function as intended; however, some interactivity is limited on mobile devices. Future iterations should introduce enhanced touch-based controls and additional visual cues to improve the mobile user experience. |
+- [x] Bug fixes<br><br>
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/0cc115c8-afea-438d-bfb2-826a25f8783b" width="240" height="200" style="object-fit: cover; display: block;">
+  <img src="https://github.com/user-attachments/assets/0494554c-8f45-4cdd-ae09-8cccfe45559e" width="240" height="200" style="object-fit: cover; display: block;">
+</p>
+✔ *Partially met.* Core gameplay elements function as intended; however, some interactivity is limited on mobile devices. |
+
 
 
 **Testing Player Goals**
