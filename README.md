@@ -311,8 +311,9 @@ This project is deployed via **GitHub Pages**:
 
 | Goal | Result |
 |------|--------|
-| **Ability to view the website across a variety of screen sizes** | ✔ The layout is fully responsive and displays correctly across multiple devices and modern browsers. |
-| **Access to easy-to-use interactive elements** | ✔ *Partially met.* Core gameplay elements function as intended; however, some interactivity is limited on mobile devices. Future iterations should introduce enhanced touch-based controls and additional visual cues to improve the mobile user experience. |
+| **1. As a user, I want to see a friendly homepage with a responsive design.**<br><br>- [x] Create home page<br>- [x] Create background image<br>- [x] Basic project structure<br>- [x] Player placeholder sprite images | ✔ The layout is fully responsive and displays correctly across multiple devices and modern browsers. |
+| **2. As a user, I want to see the core mechanics.**<br><br>- [x] Player movement (run + jump)<br>- [x] Gravity & physics<br>- [x] Collision detection | ✔ *Partially met.* Core gameplay elements function as intended; however, some interactivity is limited on mobile devices. Future iterations should introduce enhanced touch-based controls and additional visual cues to improve the mobile user experience. |
+
 
 
 **Testing Player Goals**
