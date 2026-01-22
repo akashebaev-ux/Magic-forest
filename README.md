@@ -76,6 +76,9 @@ Players are immersed in a magical world filled with forests, creatures, and inte
 
 - View the **Magic Forest** game seamlessly across all device sizes, including mobile, tablet, and desktop.
 
+  <img  src="https://github.com/user-attachments/assets/fb4d9af6-fd32-4812-b71e-94725c516d91" width="600">
+
+
 ## Potential Client Goals
 
 - High-quality visual design and smooth character animations
@@ -85,12 +88,13 @@ Players are immersed in a magical world filled with forests, creatures, and inte
 
 GitHub project planning tools were used to track the progress of **user stories** throughout the development of Magic Forest. Each user story includes clearly defined **acceptance criteria** and **associated tasks**, ensuring structured and goal-oriented development.
 
-<img  src="https://github.com/user-attachments/assets/1f4c4847-a702-4ccf-95e0-f117bd11ea97" width="600">
+<img  src="https://github.com/user-attachments/assets/4b1d2174-4c19-4e1d-9830-d9d12e9902ac" width="600">
 
 
 The stories were organised into progress stages, which helped maintain focus, monitor development milestones, and ensure consistent forward momentum throughout the project lifecycle.
 
-<img  src="https://github.com/user-attachments/assets/ae23ea41-960f-4b44-925c-9cae4818d1d2" width="600">
+<img  src="https://github.com/user-attachments/assets/a28690c7-448b-4a9c-a6a4-4ea3d45435ff" width="600">
+
 
 
 
