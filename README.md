@@ -78,6 +78,10 @@ Players are immersed in a magical world filled with forests, creatures, and inte
 
   <img  src="https://github.com/user-attachments/assets/fb4d9af6-fd32-4812-b71e-94725c516d91" width="600">
 
+**Note:** The “Could Have” user story is left for future implementation.
+
+  <img src="https://github.com/user-attachments/assets/3dc02ded-2ea8-499b-a9fe-563fc0d42a2b" width="600">
+
 
 ## Potential Client Goals
 
@@ -110,6 +114,9 @@ Character movement animations were generated using [Pixverse.ai](https://app.pix
 To ensure seamless integration with the game environment, the background of each extracted frame was removed using [Carve.Photos](carve.photos), resulting in transparent images that blend cleanly with the game background.
 
 The forest background was generated using ChatGPT, and the colour palette [ImageColorPicker.com](https://imagecolorpicker.com/) was selected to support a fantasy-style visual theme. This ensured visual consistency between the animated character and the environment, contributing to an immersive and cohesive game experience.
+
+<img  src="https://github.com/user-attachments/assets/0ea32636-8b1b-49a6-a77c-0f1d69f5e27b" width="600">
+
 
 ## 2.2 Typography
 
@@ -237,7 +244,6 @@ Magic Forest is built with:
 - [Favicon.io](https://favicon.io/) – Used to create the site’s emoji favicon.
 - [Amiresponsive](https://ui.dev/amiresponsive) – Used to display how the website appears across multiple device sizes.
 - [Pixverse.ai](https://app.pixverse.ai/onboard) – Used to generate the custom AI-created video.
-- [Ezgif](https://ezgif.com/video-to-gif) - Used to generate the GIF images.
 - [FreeConvert](https://www.freeconvert.com/) – Used to change the image format from PNG to WebP.
 - [ImageColorPicker.com](https://imagecolorpicker.com/) – Used to select and refine colour values for the game design.
 - [miniWebtool] (ru.miniwebtool.com) – Used to extract sprite images from animation videos.
@@ -384,7 +390,7 @@ All key features, interactive elements, and page layouts were reviewed across ea
 
 Using the Lighthouse feature in Chrome DevTools, I assessed the website’s performance, accessibility, and best-practice compliance for both mobile and desktop views.
 
-<img  src="https://github.com/user-attachments/assets/0208a835-75ac-44ab-9814-a10c0c4dfa3b" width="600">
+<img src="https://github.com/user-attachments/assets/e6d8d872-9bac-4119-80f5-083ed3f0da77" width="600">
 
 
 ## 6.5 Validation
@@ -399,12 +405,10 @@ To ensure code quality, I validated every HTML page and the CSS file using the o
 
 ----
 
-CSS validator [Jigsaw](https://jigsaw.w3.org/css-validator/validator)
+CSS validator [Jigsaw]([https://jigsaw.w3.org/css-validator/validator](https://jigsaw.w3.org/css-validator/validator))
 
-<img src="https://github.com/user-attachments/assets/db51eff5-3b6f-4b27-b0b5-4a9a24810fbd" width="600">
+<img src="https://github.com/user-attachments/assets/89b5c78b-eaa9-435a-b0fe-d2e38997faa0" width="600">
 
-
-**Note:** .scroll-gallery::-webkit-scrollbar { display: none; } was used to apply custom styles to the scrollbar and hide it while preserving its primary functionality.
 
 ---
 
